@@ -1,0 +1,210 @@
+@startuml erd_ravellog
+
+' hide the spot
+hide circle
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "users" as  usr {
+  *id: int, auto_increment (PK)
+  --
+  username: varchar(50)
+  password: varchar(191)
+  privilege: varchar(20)
+  remember_token: varchar(191)
+  created_at: timestamp
+  updated_at: timestamp
+  updated_by: int
+  barcode: varchar(100)
+  status: varchar(10)
+}
+
+entity "history_users" as husr {
+  *id: int, auto_increment (PK)
+  --
+  id_users: int (FK)
+  activity: varchar(50)
+  id_user: int
+  datetime: datetime
+}
+
+entity "kanban_tags" as kbt {
+  *id: int, auto_increment (PK)
+  --
+  epc: varchar(24)
+  cycle: int
+  created_by: datetime
+  created_at: datetime
+  updated_at: datetime
+  updated_by: datetime
+  status: varchar(10)
+  disable_end: datetime
+  remark: varchar(100)
+}
+
+entity "skid_tags" as skt {
+  *id: int, auto_increment (PK)
+  --
+  epc: varchar(24)
+  cycle: int
+  created_by: datetime
+  created_at: datetime
+  updated_at: datetime
+  updated_by: datetime
+  status: varchar(10)
+  disable_end: datetime
+  remark: varchar(100)
+}
+
+entity "history_kanban_tags" as hkbt {
+  *id: int, auto_increment (PK)
+  --
+  id_kanban_tags: int (FK)
+  activity: varchar(50)
+  id_user: int
+  datetime: datetime
+}
+
+entity "history_skid_tags" as hskt {
+  *id: int, auto_increment (PK)
+  --
+  id_skid_tags: int (FK)
+  activity: varchar(50)
+  id_user: int
+  datetime: datetime
+}
+
+entity "read_logs" as rl {
+  *id: int, auto_increment (PK)
+  --
+  p_lane: varchar
+  part_no: varchar(24)
+  qty: int
+  read_by: varchar
+  status: varchar
+  created_at: datetime
+  id_user: int
+  remark: varchar(50)
+  supp_code: varchar(50)
+  id_tb_r_rfid_trigger: int
+}
+
+entity "history_read_kanbans" as hrkb {
+  *id: int, auto_increment (PK)
+  --
+  id_read_logs: int (FK)
+  id_kanban_tags: int
+  created_at: datetime
+}
+
+
+entity "history_read_skids" as hrsk {
+  *id: int, auto_increment (PK)
+  --
+  id_read_logs: int (FK)
+  id_skid_tags: int
+  created_at: datetime
+}
+
+entity "kanbans" as kb {
+  *id: int, auto_increment (PK)
+  --
+  unique_no: varchar(24)
+  part_no: varchar(24)
+  supp_code: varchar(5)
+  supp_name: varchar(50)
+  supp_abr: varchar(5)
+  created_at: timestamp
+  created_by: int
+  updated_at: timestamp
+  updated_by: int
+  status: varchar(10)
+  disable_day: int
+  disable_hour: int
+}
+
+entity "suppliers" as sp {
+  *id: int, auto_increment (PK)
+  --
+  supp_code: varchar(5)
+  supp_name: varchar(50)
+  supp_abr: varchar(5)
+  created_at: timestamp
+  created_by: int
+  updated_at: timestamp
+  updated_by: int
+  status: varchar(10)
+  disable_day: int
+  disable_hour: int
+}
+
+entity "manifest" as mfst {
+  *id: int, auto_increment (PK)
+  --
+  prod_date: date
+  p_lane: varchar
+  part_no: varchar
+  created_at: datetime
+  disable_at: datetime
+}
+
+entity "exit_logs" as extl {
+  *id: int, auto_increment (PK)
+  --
+  letter_no: varchar(17)
+  unique_no: varchar(24)
+  supplier_code: varchar(10)
+  part_no: varchar(24)
+  qty: int
+  read_by: varchar(1)
+  status: varchar(10)
+  created_at: datetime
+  id_user: int
+  remark: varchar(50)
+}
+
+entity "history_exit_kanbans" as hextkb {
+  *id: int, auto_increment (PK)
+  --
+  id_exit_logs: int
+  id_kanban_tags: int
+  created_at: datetime
+  updated_at: datetime
+  updated_at: datetime
+  updated_by: int
+}
+
+entity "aplha_differences" as alpdiff {
+  *id: int, auto_increment (PK)
+  --
+  id_kanbans: int
+  difference_percentage: int
+  created_at: timestamp
+  created_by: int
+  updated_at: timestamp
+  updated_by: int
+  status: varchar(10)
+  disable_day: int
+  disable_hour: int
+}
+
+entity "TB_R_RFID_TRIGGER" as tbrrfidtgr {
+  *id: int, auto_increment (PK)
+  --
+  letter_no: varchar(17)
+  part_no: varchar(24)
+  qty: int
+  exit_gate: varchar(1)
+  id_tb_r_rfid_trigger: int
+}
+
+tbrrfidtgr ||..o{ rl
+kbt ||..o{ hkbt
+skt ||..o{ hskt
+rl ||..o{ hrkb
+rl ||..o{ hrsk
+kbt ||..o{ hrkb
+skt ||..o{ hrsk
+usr ||..o{ husr
+
+@enduml
