@@ -5,7 +5,7 @@ hide circle
 ' avoid problems with angled crows feet
 skinparam linetype ortho
 
-entity "users" as  usr {
+entity "**users**" as  usr {
   *id: int, auto_increment (PK)
   --
   username: varchar(50)
@@ -19,7 +19,7 @@ entity "users" as  usr {
   status: varchar(10)
 }
 
-entity "history_users" as husr {
+entity "**history_users**" as husr {
   *id: int, auto_increment (PK)
   --
   id_users: int (FK)
@@ -28,7 +28,7 @@ entity "history_users" as husr {
   datetime: datetime
 }
 
-entity "kanban_tags" as kbt {
+entity "**kanban_tags**" as kbt {
   *id: int, auto_increment (PK)
   --
   epc: varchar(24)
@@ -42,7 +42,7 @@ entity "kanban_tags" as kbt {
   remark: varchar(100)
 }
 
-entity "skid_tags" as skt {
+entity "**skid_tags**" as skt {
   *id: int, auto_increment (PK)
   --
   epc: varchar(24)
@@ -56,7 +56,7 @@ entity "skid_tags" as skt {
   remark: varchar(100)
 }
 
-entity "history_kanban_tags" as hkbt {
+entity "**history_kanban_tags**" as hkbt {
   *id: int, auto_increment (PK)
   --
   id_kanban_tags: int (FK)
@@ -65,7 +65,7 @@ entity "history_kanban_tags" as hkbt {
   datetime: datetime
 }
 
-entity "history_skid_tags" as hskt {
+entity "**history_skid_tags**" as hskt {
   *id: int, auto_increment (PK)
   --
   id_skid_tags: int (FK)
@@ -74,7 +74,7 @@ entity "history_skid_tags" as hskt {
   datetime: datetime
 }
 
-entity "read_logs" as rl {
+entity "**read_logs**" as rl {
   *id: int, auto_increment (PK)
   --
   p_lane: varchar
@@ -89,7 +89,7 @@ entity "read_logs" as rl {
   id_tb_r_rfid_trigger: int
 }
 
-entity "history_read_kanbans" as hrkb {
+entity "**history_read_kanbans**" as hrkb {
   *id: int, auto_increment (PK)
   --
   id_read_logs: int (FK)
@@ -98,7 +98,7 @@ entity "history_read_kanbans" as hrkb {
 }
 
 
-entity "history_read_skids" as hrsk {
+entity "**history_read_skids**" as hrsk {
   *id: int, auto_increment (PK)
   --
   id_read_logs: int (FK)
@@ -106,7 +106,7 @@ entity "history_read_skids" as hrsk {
   created_at: datetime
 }
 
-entity "kanbans" as kb {
+entity "**kanbans**" as kb {
   *id: int, auto_increment (PK)
   --
   unique_no: varchar(24)
@@ -123,7 +123,7 @@ entity "kanbans" as kb {
   disable_hour: int
 }
 
-entity "suppliers" as sp {
+entity "**suppliers**" as sp {
   *id: int, auto_increment (PK)
   --
   supp_code: varchar(5)
@@ -138,7 +138,7 @@ entity "suppliers" as sp {
   disable_hour: int
 }
 
-entity "manifest" as mfst {
+entity "**manifest**" as mfst {
   *id: int, auto_increment (PK)
   --
   prod_date: date
@@ -148,7 +148,7 @@ entity "manifest" as mfst {
   disable_at: datetime
 }
 
-entity "exit_logs" as extl {
+entity "**exit_logs**" as extl {
   *id: int, auto_increment (PK)
   --
   letter_no: varchar(17)
@@ -163,7 +163,7 @@ entity "exit_logs" as extl {
   remark: varchar(50)
 }
 
-entity "history_exit_kanbans" as hextkb {
+entity "**history_exit_kanbans**" as hextkb {
   *id: int, auto_increment (PK)
   --
   id_exit_logs: int
@@ -174,7 +174,7 @@ entity "history_exit_kanbans" as hextkb {
   updated_by: int
 }
 
-entity "aplha_differences" as alpdiff {
+entity "**aplha_differences**" as alpdiff {
   *id: int, auto_increment (PK)
   --
   id_kanbans: int
@@ -188,7 +188,7 @@ entity "aplha_differences" as alpdiff {
   disable_hour: int
 }
 
-entity "TB_R_RFID_TRIGGER" as tbrrfidtgr {
+entity "**TB_R_RFID_TRIGGER**" as tbrrfidtgr {
   *id: int, auto_increment (PK)
   --
   letter_no: varchar(17)

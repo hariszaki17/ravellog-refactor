@@ -1,0 +1,14 @@
+@startuml flowchart_ravellog
+start
+:EPC from gate RFID;
+:pooling tag, TTL 5 minutes;
+if (EPC enabled and registered) then
+    :mantap;
+    detach
+else
+    :waw;
+
+:This is defined on
+several **lines**;
+stop
+@enduml
